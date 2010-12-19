@@ -8,8 +8,6 @@
     <title><decorator:title default="Vraptor Scaffold"/></title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/stylesheets/scaffold.css"/>" />  
     <script src="<c:url value='/javascripts/codepress/codepress.js'/>" type="text/javascript"></script>
-    <link type="text/css" href="<c:url value='/javascripts/codepress/languages/java.css'/>" rel="stylesheet" id="cp-lang-style" />
-<!--        <script src="<c:url value='/javascripts/codepress/languages/java.js'/>" type="text/javascript"></script>-->
     <decorator:head/>
   </head>
   <body>

@@ -44,7 +44,7 @@
   </div>
   <div class="field">
 <!--    Trecho:<br />-->
-    <textarea rows="10" cols="30" name="code.snippet" style="max-width: 90%;" >${code.snippet }</textarea>
+    <textarea rows="10" cols="100" name="code.snippet" style="max-width: 90%;" >${code.snippet }</textarea>
 <!--    <input type="text" name="code.snippet" value="${code.snippet}" />-->
   </div>
   <div class="actions">

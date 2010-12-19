@@ -1,11 +1,16 @@
 body { background-color: #fff; color: #333; }
 
-body, p, ol, ul, td {
+body, p, ol, ul {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;
 }
 
+h1 {
+	text-align: center;	
+	font-size:   30pt;
+}
+	
 pre {
   background-color: #eee;
   padding: 10px;
@@ -13,14 +18,37 @@ pre {
 }
 
 a { 
-	color: #000;
-	font-size:   12pt;
+	padding:0px;
+	margin:0px;
+	color: #00F;
+	font-size:12pt;
 }
-a:visited { color: #666; }
-a:hover { color: #fff; background-color:#000; }
+a:visited { 
+	padding:0px;
+	margin:0px;
+	color: #0BF;
+	font-size:12pt;
+}
+
+a:hover { 
+	padding:0px;
+	margin:0px;
+	color: #000;
+	background-color:#FFF;
+}
 
 div.field, div.actions {
   margin-bottom: 10px;
+}
+
+.actions {
+	float:left;
+	
+}
+
+.actions2 {
+	float:left;
+	
 }
 
 #notice {
@@ -59,10 +87,40 @@ div.field, div.actions {
 }
 
 .searchResult {
-	float: right;
-	font-size:   10px;
+	font-size: 10px;
+	text-align: right;
+}
+
+#insert {
+	float:left;
+	width:70%; max-width: 70%;
 }
 
 #search {
+	padding:0px;
+	margin:0px;
+	float: left;
+	border: 2px solid;
+	width: 28%;
 
+}
+
+#searchTitle {
+	text-align: center;
+	font-weight: bold;
+	font-size: 13pt;
+}
+
+.blank {
+	height: 20px;
+	width:100%
+}
+
+td {
+  text-align: right;
+  
+}
+
+#table {
+	float: right;	
 }

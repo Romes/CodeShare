@@ -9,11 +9,11 @@
 </div>
 
 <div id="search" style="float:right; width:70%;">
-	<form action="<c:url value="/codes"/>" method="get">
+	<form action="<c:url value="/codes/search"/>" method="get">
 	
 		 <div class="actionSearch">
 		   Palavra-chave:
-    <input type="text" name="code.name" value="${code.searchTags}"/>
+    <input type="text" name="code.searchTags" value="${code.searchTags}"/>
     		<button type="submit">Buscar</button>
   		</div>
 	

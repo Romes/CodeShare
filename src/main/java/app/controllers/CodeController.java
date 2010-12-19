@@ -20,6 +20,7 @@ public class CodeController {
 	private final Result result;
 	private final CodeRepository repository;
 	private final Validator validator;
+	private String search;
 	
 	public CodeController(Result result, CodeRepository repository, Validator validator) {
 		this.result = result;
@@ -30,21 +31,30 @@ public class CodeController {
 	@Get
 	@Path("/codes")
 	public List<Code> index(Code code, boolean clean) {
+		System.out.println("SEARCH INDEX: " + this.search);
 		if(code == null)
 		{
 			code = new Code();
-			return repository.findByTags("");
-		}
+			return repository.findByTags(search);
 			//return repository.findAll();
+		}
 		else
 		{
 			result.include("code", code);
-			String search = code.getSearchTags();
+			
 			if(clean)
 				code.clean();
 			return repository.findByTags(search);
 			//return repository.findAll();
 		}
+	}
+	
+	@Get
+	@Path("/codes/search")
+	public void searchParameter(Code code) {
+		search = code.getSearchTags();
+		System.out.println("SEARCH: " + this.search);
+		this.result.use(Results.logic()).forwardTo(CodeController.class).index(code,false);
 	}
 	
 	@Post
@@ -70,13 +80,13 @@ public class CodeController {
 		validator.validate(code);
 		validator.onErrorUsePageOf(this).edit(code);
 		repository.update(code);
-		result.redirectTo(this).index(code,true);
+		result.forwardTo(this).index(code,true);
 	}
 	
 	@Get
 	@Path("/codes/{code.id}/edit")
 	public void edit(Code code) {
-		this.result.use(Results.logic()).redirectTo(CodeController.class).index(repository.find(code.getId()),false);
+		this.result.use(Results.logic()).forwardTo(CodeController.class).index(repository.find(code.getId()),false);
 	}
 
 	@Get

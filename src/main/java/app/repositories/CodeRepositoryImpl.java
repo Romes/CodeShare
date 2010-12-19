@@ -1,5 +1,7 @@
 package app.repositories;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import br.com.caelum.vraptor.ioc.Component;
@@ -12,5 +14,14 @@ public class CodeRepositoryImpl
 
 	public CodeRepositoryImpl(EntityManager entityManager) {
 		super(entityManager);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Code> findByTags(String tag) {
+		if(tag==null)
+			tag = "";
+		return entityManager.createQuery("From app.models.Code WHERE tags LIKE \'%" + tag +"%\'" ).getResultList();
+
 	}
 }

@@ -1,5 +1,12 @@
+<head>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
+
+</head>
+
 <body>
+
 <h1>Codeshare</h1>
 
 

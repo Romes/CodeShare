@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script type="text/javascript" src="<c:url value='/javascripts/jquery.min.js'/>"></script>
+ <link type="text/css" href="<c:url value='/javascripts/codepress/languages/java.css'/>" rel="stylesheet" id="cp-lang-style" />
+   
 <c:if test="${not empty errors}">
 	<c:forEach items="${errors}" var="error">
 		 ${error.category} - ${error.message}<br />
@@ -44,7 +45,7 @@
   </div>
   <div class="field">
 <!--    Trecho:<br />-->
-    <textarea name="code.snippet" style="width: 95%;max-width: 95%; max-height:253px; height: 253px" >${code.snippet }</textarea>
+    <textarea id="codeArea" name="code.snippet" style="width: 95%;max-width: 95%; max-height:253px; height: 253px" class="codepress java ">${code.snippet }</textarea>
 <!--    <input type="text" name="code.snippet" value="${code.snippet}" />-->
   </div>
   <div class="actions">
@@ -53,6 +54,7 @@
 </form>
 
 <script type="text/javascript" >
+	
 	function changeLang(lang)
 	{
 		$('[name=code.lang]').val(lang);
@@ -67,4 +69,3 @@
 		    </form>
 		    </div>
 <!--<a href="<c:url value="/codes"/>">Back</a>-->
-

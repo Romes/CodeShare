@@ -45,16 +45,19 @@
   </div>
   <div class="field">
 <!--    Trecho:<br />-->
-    <textarea id="codeArea" name="code.snippet" style="width: 95%;max-width: 95%; max-height:253px; height: 253px" class="codepress java ">${code.snippet }</textarea>
-<!--    <input type="text" name="code.snippet" value="${code.snippet}" />-->
+    <textarea id="codeArea"  style="width: 95%;max-width: 95%; max-height:253px; height: 253px" class="codepress java "  >${code.snippet }</textarea>
+    <input type="hidden" id="snippet" name="code.snippet" value="${code.snippet}" />
   </div>
   <div class="actions">
-    <button type="submit">Salvar</button>
+    <button type="submit" onclick="javascript:enviar(codeArea.getCode())">Salvar</button>
   </div>
 </form>
 
 <script type="text/javascript" >
-	
+	function enviar(code)
+	{
+		$('#snippet').val(code);
+	}
 	function changeLang(lang)
 	{
 		$('[name=code.lang]').val(lang);

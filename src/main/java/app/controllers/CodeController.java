@@ -46,12 +46,8 @@ public class CodeController {
 		else
 		{
 			result.include("code", code);
-			
 			if(clean)
 				code.clean();
-			
-			
-			
 			return repository.findByTags(this.searchTag.getSearchTag());
 		}
 	}
@@ -67,9 +63,11 @@ public class CodeController {
 	@Path("/codes")
 	public void create(Code code) {
 		validator.validate(code);
+		System.out.println("LANG: " + code.getLang());
+		System.out.println("TEXTO: " + code.getSnippet());
 		validator.onErrorUsePageOf(this).newCode();
 		repository.create(code);
-		System.out.println(code.getLang());
+		
 		
 		result.redirectTo(this).index(code, true);
 	}

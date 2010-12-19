@@ -16,12 +16,12 @@
   <div class="field">
     Nome:
 <!--    <br />-->
-    <input type="text" name="code.name" value="${code.name}"/>
+    <input type="text" name="code.name" value="${code.name}" class="inputField"/>
   </div>
   <div class="field">
     Tags:
 <!--    <br />-->
-    <input type="text" name="code.tags" value="${code.tags}"/>
+    <input type="text" name="code.tags" value="${code.tags}" class="inputField"/>
   </div>
   <div class="field">
     Linguagem:
@@ -44,7 +44,7 @@
   </div>
   <div class="field">
 <!--    Trecho:<br />-->
-    <textarea rows="10" cols="100" name="code.snippet" style="max-width: 90%;" >${code.snippet }</textarea>
+    <textarea name="code.snippet" style="width: 95%;max-width: 95%; max-height:253px; height: 253px" >${code.snippet }</textarea>
 <!--    <input type="text" name="code.snippet" value="${code.snippet}" />-->
   </div>
   <div class="actions">

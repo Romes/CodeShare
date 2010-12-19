@@ -135,3 +135,7 @@ td {
 #table {
 	float: right;	
 }
+
+.inputField {
+	width: 90%;	
+}

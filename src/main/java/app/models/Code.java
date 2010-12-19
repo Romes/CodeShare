@@ -40,4 +40,12 @@ public class Code extends Entity {
 		return snippet;
 	}
 	
+	public void clean()
+	{
+		this.setId(null);
+		this.name = "";
+		this.lang = "";
+		this.snippet = "";
+		this.tags = "";
+	}
 }

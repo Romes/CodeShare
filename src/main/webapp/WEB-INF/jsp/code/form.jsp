@@ -26,7 +26,8 @@
   </div>
   <div class="field">
     Snippet:<br />
-    <input type="text" name="code.snippet" value="${code.snippet}"/>
+    <textarea rows="10" cols="30" name="code.snippet" style="max-width: 90%;" >${code.snippet }</textarea>
+<!--    <input type="text" name="code.snippet" value="${code.snippet}" />-->
   </div>
   <div class="actions">
     <button type="submit">send</button>

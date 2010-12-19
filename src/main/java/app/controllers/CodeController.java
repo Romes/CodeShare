@@ -12,6 +12,7 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.view.Results;
 
 @Resource
 public class CodeController {
@@ -28,8 +29,15 @@ public class CodeController {
 	
 	@Get
 	@Path("/codes")
-	public List<Code> index() {
-		return repository.findAll();
+	public List<Code> index(Code code) {
+		if(code == null)
+			return repository.findAll();
+		else
+		{
+			result.include("code", code);
+			//code.clean();
+			return repository.findAll();
+		}
 	}
 	
 	@Post
@@ -38,7 +46,7 @@ public class CodeController {
 		validator.validate(code);
 		validator.onErrorUsePageOf(this).newCode();
 		repository.create(code);
-		result.redirectTo(this).index();
+		result.redirectTo(this).index(code);
 	}
 	
 	@Get
@@ -53,13 +61,13 @@ public class CodeController {
 		validator.validate(code);
 		validator.onErrorUsePageOf(this).edit(code);
 		repository.update(code);
-		result.redirectTo(this).index();
+		result.redirectTo(this).index(code);
 	}
 	
 	@Get
 	@Path("/codes/{code.id}/edit")
-	public Code edit(Code code) {
-		return repository.find(code.getId());
+	public void edit(Code code) {
+		this.result.use(Results.logic()).redirectTo(CodeController.class).index(repository.find(code.getId()));
 	}
 
 	@Get
@@ -72,7 +80,7 @@ public class CodeController {
 	@Path("/codes/{code.id}")
 	public void destroy(Code code) {
 		repository.destroy(repository.find(code.getId()));
-		result.redirectTo(this).index();  
+		result.redirectTo(this).index(null);  
 	}
 	
 }

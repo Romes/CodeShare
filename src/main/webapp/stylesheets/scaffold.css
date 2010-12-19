@@ -37,8 +37,9 @@ a:hover {
 	background-color:#FFF;
 }
 
-div.field, div.actions {
+div.field, div.actions, div.actions2 {
   margin-bottom: 10px;
+  padding: 10px;
 }
 
 .actions {
@@ -93,7 +94,14 @@ div.field, div.actions {
 
 #insert {
 	float:left;
-	width:70%; max-width: 70%;
+	width:70%;
+	max-width: 70%;
+	height: 500px;
+	overflow: auto;
+	border-left: 2px solid;
+	border-bottom: 2px solid;
+	border-top: 2px solid;
+	
 }
 
 #search {
@@ -102,6 +110,8 @@ div.field, div.actions {
 	float: left;
 	border: 2px solid;
 	width: 28%;
+	height: 500px;
+	overflow: auto;
 
 }
 
@@ -118,6 +128,7 @@ div.field, div.actions {
 
 td {
   text-align: right;
+  padding-left: 10px;
   
 }
 

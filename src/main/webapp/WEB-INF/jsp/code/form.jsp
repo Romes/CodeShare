@@ -60,9 +60,11 @@
 
 </script>
 
+<div class="actions2">
  <form action="<c:url value="/codes/${code.id}"/>" method="post">
 	    	  <input type="hidden" name="_method" value="delete"/>
-	    	  <button type="submit" onclick="return confirm('Are you sure?')">destroy</button>
+	    	  <button type="submit" onclick="return confirm('Are you sure?')">Apagar</button>
 		    </form>
+		    </div>
 <!--<a href="<c:url value="/codes"/>">Back</a>-->
 

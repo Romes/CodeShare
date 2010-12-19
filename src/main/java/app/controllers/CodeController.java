@@ -31,10 +31,9 @@ public class CodeController {
 	@Get
 	@Path("/codes")
 	public List<Code> index(Code code, boolean clean) {
-		System.out.println("SEARCH INDEX: " + this.search);
 		if(code == null)
 		{
-			code = new Code();
+			//code = new Code();
 			return repository.findByTags(search);
 			//return repository.findAll();
 		}
@@ -49,12 +48,12 @@ public class CodeController {
 		}
 	}
 	
-	@Get
+	@Post
 	@Path("/codes/search")
-	public void searchParameter(Code code) {
-		search = code.getSearchTags();
-		System.out.println("SEARCH: " + this.search);
-		this.result.use(Results.logic()).forwardTo(CodeController.class).index(code,false);
+	public void searchParameter(String search) {
+		this.search = search;
+		result.include("search", this.search);
+		this.result.use(Results.logic()).forwardTo(CodeController.class).index(null,false);
 	}
 	
 	@Post

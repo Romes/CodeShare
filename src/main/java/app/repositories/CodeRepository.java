@@ -18,5 +18,7 @@ public interface CodeRepository {
 	Code find(Long id);
 	
 	List<Code> findAll();
+	
+	List<Code> findByTags(String tag);
 
 }

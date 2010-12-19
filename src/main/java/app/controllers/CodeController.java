@@ -29,14 +29,21 @@ public class CodeController {
 	
 	@Get
 	@Path("/codes")
-	public List<Code> index(Code code) {
+	public List<Code> index(Code code, boolean clean) {
 		if(code == null)
-			return repository.findAll();
+		{
+			code = new Code();
+			return repository.findByTags("");
+		}
+			//return repository.findAll();
 		else
 		{
 			result.include("code", code);
-			//code.clean();
-			return repository.findAll();
+			String search = code.getSearchTags();
+			if(clean)
+				code.clean();
+			return repository.findByTags(search);
+			//return repository.findAll();
 		}
 	}
 	
@@ -46,7 +53,9 @@ public class CodeController {
 		validator.validate(code);
 		validator.onErrorUsePageOf(this).newCode();
 		repository.create(code);
-		result.redirectTo(this).index(code);
+		System.out.println(code.getLang());
+		
+		result.redirectTo(this).index(code, true);
 	}
 	
 	@Get
@@ -61,13 +70,13 @@ public class CodeController {
 		validator.validate(code);
 		validator.onErrorUsePageOf(this).edit(code);
 		repository.update(code);
-		result.redirectTo(this).index(code);
+		result.redirectTo(this).index(code,true);
 	}
 	
 	@Get
 	@Path("/codes/{code.id}/edit")
 	public void edit(Code code) {
-		this.result.use(Results.logic()).redirectTo(CodeController.class).index(repository.find(code.getId()));
+		this.result.use(Results.logic()).redirectTo(CodeController.class).index(repository.find(code.getId()),false);
 	}
 
 	@Get
@@ -80,7 +89,7 @@ public class CodeController {
 	@Path("/codes/{code.id}")
 	public void destroy(Code code) {
 		repository.destroy(repository.find(code.getId()));
-		result.redirectTo(this).index(null);  
+		result.redirectTo(this).index(null,false);  
 	}
 	
 }

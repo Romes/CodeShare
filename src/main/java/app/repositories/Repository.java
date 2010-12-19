@@ -36,6 +36,13 @@ public abstract class Repository<T, I extends Serializable> {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<T> findByTags(String tag) {
+		if(tag==null)
+			tag = "";
+		return entityManager.createQuery("From " + getParameterizedClass().getName() + " WHERE tags LIKE \'%" + tag +"%\'" ).getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
 	private Class<T> getParameterizedClass() {
 		ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
 		return (Class<T>) parameterizedType.getActualTypeArguments()[0];

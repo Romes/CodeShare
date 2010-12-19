@@ -7,6 +7,7 @@ public class Code extends Entity {
 	private String tags;
 	private String lang;
 	private String snippet;
+	private String searchTags;
 	
 	public void setName(String name) {
 		this.name = name;
@@ -47,5 +48,16 @@ public class Code extends Entity {
 		this.lang = "";
 		this.snippet = "";
 		this.tags = "";
+		//this.searchTags = "";
 	}
+
+	public String getSearchTags() {
+		return searchTags;
+	}
+
+	public void setSearchTags(String searchTags) {
+		this.searchTags = searchTags;
+	}
+	
+	
 }

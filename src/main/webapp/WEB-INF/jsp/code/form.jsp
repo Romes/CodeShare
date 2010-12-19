@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script type="text/javascript" src="<c:url value='/javascripts/jquery.min.js'/>"></script>
 <c:if test="${not empty errors}">
 	<c:forEach items="${errors}" var="error">
 		 ${error.category} - ${error.message}<br />
@@ -13,26 +14,55 @@
   </c:if>
 
   <div class="field">
-    Name:<br />
+    Nome:
+<!--    <br />-->
     <input type="text" name="code.name" value="${code.name}"/>
   </div>
   <div class="field">
-    Tags:<br />
+    Tags:
+<!--    <br />-->
     <input type="text" name="code.tags" value="${code.tags}"/>
   </div>
   <div class="field">
-    Lang:<br />
-    <input type="text" name="code.lang" value="${code.lang}"/>
+    Linguagem:
+<!--    <br />-->
+    
+    <input type="radio"  name="langs" value="Java" <c:if test="${code.lang eq \"Java\" }"> checked </c:if> onclick="javascript:changeLang('Java');"> JAVA 
+    <input type="radio" name="langs" value="C" <c:if test="${code.lang eq \"C\" }"> checked </c:if> onclick="javascript:changeLang('C');"> C 
+    <input type="radio" name="langs" value="Ruby" <c:if test="${code.lang eq \"Ruby\" }"> checked </c:if> onclick="javascript:changeLang('Ruby');"> RUBY 
+	<input type="radio" name="langs" value="Python" <c:if test="${code.lang eq \"Python\" }"> checked </c:if> onclick="javascript:changeLang('Python');"> Python
+
+<br />
+<!--	<select name="code.langs" >-->
+<!--	  <option value="Java" onclick="" >Java</option>-->
+<!--	  <option value="C">C</option>-->
+<!--	  <option value="Python">Python</option>-->
+<!--	  <option value="Ruby">Ruby</option>-->
+<!--	</select>-->
+    
+    <input type="hidden" name="code.lang" id="code.lang" value="${code.lang}"/>
   </div>
   <div class="field">
-    Snippet:<br />
+<!--    Trecho:<br />-->
     <textarea rows="10" cols="30" name="code.snippet" style="max-width: 90%;" >${code.snippet }</textarea>
 <!--    <input type="text" name="code.snippet" value="${code.snippet}" />-->
   </div>
   <div class="actions">
-    <button type="submit">send</button>
+    <button type="submit">Salvar</button>
   </div>
 </form>
 
-<a href="<c:url value="/codes"/>">Back</a>
+<script type="text/javascript" >
+	function changeLang(lang)
+	{
+		$('[name=code.lang]').val(lang);
+	}
+
+</script>
+
+ <form action="<c:url value="/codes/${code.id}"/>" method="post">
+	    	  <input type="hidden" name="_method" value="delete"/>
+	    	  <button type="submit" onclick="return confirm('Are you sure?')">destroy</button>
+		    </form>
+<!--<a href="<c:url value="/codes"/>">Back</a>-->
 

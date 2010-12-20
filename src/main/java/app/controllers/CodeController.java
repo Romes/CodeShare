@@ -63,7 +63,7 @@ public class CodeController {
 	@Post
 	@Path("/codes")
 	public void create(Code code) {
-		CodeValidation(code);
+		CodeValidation(code, true);
 		validator.onErrorForwardTo(CodeController.class).index(code,false);
 		repository.create(code);
 		result.redirectTo(this).index(code, true);
@@ -78,7 +78,7 @@ public class CodeController {
 	@Put
 	@Path("/codes")
 	public void update(Code code) {
-		CodeValidation(code);
+		CodeValidation(code,false);
 		validator.onErrorForwardTo(CodeController.class).index(code,false);
 		repository.update(code);
 		result.forwardTo(this).index(code,true);
@@ -103,7 +103,7 @@ public class CodeController {
 		result.redirectTo(this).index(null,false);  
 	}
 	
-private void CodeValidation(Code code){
+private void CodeValidation(Code code, boolean create){
 		
 		List<Code> codeList;
 		
@@ -121,11 +121,12 @@ private void CodeValidation(Code code){
 	    
 		if(code.getSnippet().isEmpty()) 
 	        validator.add(new ValidationMessage("Erro","O campo de texto do codigo não pode ser deixado em branco"));
-	    
+	    if(create){
 		codeList = repository.findByName(code.getName());
 		if(!codeList.isEmpty())
 			validator.add(new ValidationMessage("Erro","Nao pode haver dois codigos com o mesmo nome, insira um nome diferente"));
-	}
+	    }
+	    }
 	
 	private Code WithoutBlankChar(Code code){
 		code.setName(code.getName().trim());

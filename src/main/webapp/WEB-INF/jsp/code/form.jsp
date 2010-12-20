@@ -7,7 +7,7 @@
 	</c:forEach>
 </c:if>
 
-<form action="<c:url value="/codes"/>" method="post">
+<form action="<c:url value="/codes"/>" method="post" >
   
   <c:if test="${not empty code.id}">
     <input type="hidden" name="code.id" value="${code.id}"/>
@@ -28,24 +28,17 @@
     Linguagem:
 <!--    <br />-->
     
-    <input type="radio"  name="langs" value="Java" <c:if test="${code.lang eq \"Java\" }"> checked </c:if> onclick="javascript:changeLang('Java');"> JAVA 
-    <input type="radio" name="langs" value="C" <c:if test="${code.lang eq \"C\" }"> checked </c:if> onclick="javascript:changeLang('C');"> C 
-    <input type="radio" name="langs" value="Ruby" <c:if test="${code.lang eq \"Ruby\" }"> checked </c:if> onclick="javascript:changeLang('Ruby');"> RUBY 
-	<input type="radio" name="langs" value="Python" <c:if test="${code.lang eq \"Python\" }"> checked </c:if> onclick="javascript:changeLang('Python');"> Python
-
+    <input type="radio" name="langs" value="java" <c:if test="${code.lang eq \"java\" }"> checked </c:if> onclick="javascript:changeLang('java');"> Java 
+    <input type="radio" name="langs" value="csharp" <c:if test="${code.lang eq \"csharp\" }"> checked </c:if> onclick="javascript:changeLang('csharp');"> C# 
+    <input type="radio" name="langs" value="ruby" <c:if test="${code.lang eq \"ruby\" }"> checked </c:if> onclick="javascript:changeLang('ruby');"> Ruby
+	<input type="radio" name="langs" value="php" <c:if test="${code.lang eq \"php\" }"> checked </c:if> onclick="javascript:changeLang('php');"> PHP
 <br />
-<!--	<select name="code.langs" >-->
-<!--	  <option value="Java" onclick="" >Java</option>-->
-<!--	  <option value="C">C</option>-->
-<!--	  <option value="Python">Python</option>-->
-<!--	  <option value="Ruby">Ruby</option>-->
-<!--	</select>-->
     
     <input type="hidden" name="code.lang" id="code.lang" value="${code.lang}"/>
   </div>
   <div class="field">
 <!--    Trecho:<br />-->
-    <textarea id="codeArea"  style="width: 95%;max-width: 95%; max-height:253px; height: 253px" class="codepress java "  >${code.snippet }</textarea>
+    <textarea id="codeArea"  style="width: 95%;max-width: 95%; max-height:253px; height: 253px" class="codepress java" >${code.snippet }</textarea>
     <input type="hidden" id="snippet" name="code.snippet" value="${code.snippet}" />
   </div>
   <div class="actions">
@@ -61,6 +54,11 @@
 	function changeLang(lang)
 	{
 		$('[name=code.lang]').val(lang);
+		var text = codeArea.getCode();
+		codeArea.edit('codeArea',lang);
+		codeArea.toggleEditor();
+		codeArea.setCode(text);
+		codeArea.toggleEditor();
 	}
 
 </script>

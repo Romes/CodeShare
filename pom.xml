@@ -53,6 +53,7 @@
 		</plugins>
 	</build>
 
+
 	<dependencies>
 		<dependency>
 			<groupId>br.com.caelum</groupId>
@@ -133,7 +134,32 @@
 			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
-	</dependencies>
+	
+	<dependency>
+  <groupId>org.jmock</groupId>
+  <artifactId>jmock</artifactId>
+  <version>2.5.1</version>
+</dependency>
+
+<dependency>
+  <groupId>org.jmock</groupId>
+  <artifactId>jmock-junit4</artifactId>
+  <version>2.5.1</version>
+</dependency>
+
+
+<dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-core</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+<dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-library</artifactId>
+      <version>1.1</version>
+    </dependency>
+</dependencies>
 
 	<reporting>
 		<plugins>

@@ -1,6 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:if test="${not empty code.lang}">
+ <link type="text/css" href="<c:url value='/javascripts/codepress/languages/${code.lang}.css'/>" rel="stylesheet" id="cp-lang-style" />
+ </c:if>
+ <c:if test="${empty code.lang}">
  <link type="text/css" href="<c:url value='/javascripts/codepress/languages/java.css'/>" rel="stylesheet" id="cp-lang-style" />
-   
+ </c:if>
+ 
 <c:if test="${not empty errors}">
 	<c:forEach items="${errors}" var="error">
 		 ${error.category} - ${error.message}<br />

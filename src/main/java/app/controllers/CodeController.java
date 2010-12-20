@@ -13,6 +13,7 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.com.caelum.vraptor.view.Results;
 
 @Resource
@@ -62,13 +63,9 @@ public class CodeController {
 	@Post
 	@Path("/codes")
 	public void create(Code code) {
-		validator.validate(code);
-		System.out.println("LANG: " + code.getLang());
-		System.out.println("TEXTO: " + code.getSnippet());
-		validator.onErrorUsePageOf(this).newCode();
+		CodeValidation(code);
+		validator.onErrorForwardTo(CodeController.class).index(code,false);
 		repository.create(code);
-		
-		
 		result.redirectTo(this).index(code, true);
 	}
 	
@@ -81,8 +78,8 @@ public class CodeController {
 	@Put
 	@Path("/codes")
 	public void update(Code code) {
-		validator.validate(code);
-		validator.onErrorUsePageOf(this).edit(code);
+		CodeValidation(code);
+		validator.onErrorForwardTo(CodeController.class).index(code,false);
 		repository.update(code);
 		result.forwardTo(this).index(code,true);
 	}
@@ -104,6 +101,38 @@ public class CodeController {
 	public void destroy(Code code) {
 		repository.destroy(repository.find(code.getId()));
 		result.redirectTo(this).index(null,false);  
+	}
+	
+private void CodeValidation(Code code){
+		
+		List<Code> codeList;
+		
+		validator.validate(code);
+		code = WithoutBlankChar(code);
+		
+		if(code.getName().isEmpty()) 
+	        validator.add(new ValidationMessage("Erro","O campo Nome nao pode ser deixado em branco"));
+	    
+		if(code.getTags().isEmpty()) 
+	        validator.add(new ValidationMessage("Erro","O campo Tags não pode ser deixado em branco"));
+	    
+		if(code.getLang().isEmpty()) 
+	        validator.add(new ValidationMessage("Erro","Escolha uma linguagem para o codigo a ser cadastrado"));
+	    
+		if(code.getSnippet().isEmpty()) 
+	        validator.add(new ValidationMessage("Erro","O campo de texto do codigo não pode ser deixado em branco"));
+	    
+		codeList = repository.findByName(code.getName());
+		if(!codeList.isEmpty())
+			validator.add(new ValidationMessage("Erro","Nao pode haver dois codigos com o mesmo nome, insira um nome diferente"));
+	}
+	
+	private Code WithoutBlankChar(Code code){
+		code.setName(code.getName().trim());
+		code.setTags(code.getTags().trim());
+		code.setLang(code.getLang().trim());
+		code.setSnippet(code.getSnippet().trim());
+		return code;
 	}
 	
 }

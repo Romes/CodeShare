@@ -20,5 +20,7 @@ public interface CodeRepository {
 	List<Code> findAll();
 	
 	List<Code> findByTags(String tag);
+	
+	List<Code> findByName(String name);
 
 }

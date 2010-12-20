@@ -24,4 +24,10 @@ public class CodeRepositoryImpl
 		return entityManager.createQuery("From app.models.Code WHERE tags LIKE \'%" + tag +"%\'" ).getResultList();
 
 	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Code> findByName(String name){
+		return entityManager.createQuery("From app.models.Code WHERE name LIKE \'%" + name +"%\'" ).getResultList();
+	}
 }

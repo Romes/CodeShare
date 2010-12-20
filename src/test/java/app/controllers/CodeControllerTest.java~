@@ -65,7 +65,7 @@ public class CodeControllerTest {
 		controller.create(code);
 		controller.destroy(code);
 		List list = result.included("Code");
-		Assert.assertNull(list); 
+		Assert.assertNull(list);
 	}
 		
 	private Code createCode(String name, String tags, String lang, String snippet){
